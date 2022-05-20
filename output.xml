@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.5 on win32)" generated="20220520 15:33:25.491" rpa="false" schemaversion="3">
+<suite id="s1" name="Scenario4" source="C:\Users\DELL\PycharmProjects\ApiTest\TestCases\Scenario4.robot">
+<test id="s1-t1" name="FirstTestCase" line="15">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>mysession</arg>
+<arg>${base_url}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20220520 15:33:26.074" level="INFO">Creating Session using : alias=mysession, url=https://reqres.in, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220520 15:33:26.073" endtime="20220520 15:33:26.074"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${body}</var>
+<arg>name=${name}</arg>
+<arg>job=${job}</arg>
+<arg>email=${email}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220520 15:33:26.076" level="INFO">${body} = {'name': 'david', 'job': 'leader', 'email': 'david@gmail.com'}</msg>
+<status status="PASS" starttime="20220520 15:33:26.075" endtime="20220520 15:33:26.076"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220520 15:33:26.076" level="INFO">${header} = {'Content-type': 'application/json'}</msg>
+<status status="PASS" starttime="20220520 15:33:26.076" endtime="20220520 15:33:26.076"/>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<var>${response}</var>
+<arg>mysession</arg>
+<arg>/api/users</arg>
+<arg>data=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>*DEPRECATED* Please use `POST On Session` instead.</doc>
+<msg timestamp="20220520 15:33:26.077" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg timestamp="20220520 15:33:27.174" level="INFO">POST Request : url=https://reqres.in/api/users 
+ path_url=/api/users 
+ headers={'User-Agent': 'python-requests/2.27.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-type': 'application/json', 'Content-Length': '62'} 
+ body={"name": "david", "job": "leader", "email": "david@gmail.com"} 
+ </msg>
+<msg timestamp="20220520 15:33:27.175" level="INFO">POST Response : url=https://reqres.in/api/users 
+ status=201, reason=Created 
+ headers={'Date': 'Fri, 20 May 2022 11:03:27 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '107', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Etag': 'W/"6b-pIynO3KSJUIOyxpomm1n7WjVgs8"', 'Via': '1.1 vegur', 'CF-Cache-Status': 'DYNAMIC', 'Expect-CT': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=aPCE1ANbiJWnjgbPORMICi3%2BzX9LLcIIyhmyIq9D18ScU6f3Sw7fAwVaw6ujhjgU8udtVOEsNi%2Fe5OuQjMvxpSa3w%2FeQ6ej8yH0ulfwOw9XajnkUfg1Hq8v537A%3D"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Server': 'cloudflare', 'CF-RAY': '70e495f9c80274d1-LHR', 'alt-svc': 'h3=":443"; ma=86400, h3-29=":443"; ma=86400'} 
+ body={"name":"david","job":"leader","email":"david@gmail.com","id":"133","createdAt":"2022-05-20T11:03:27.032Z"} 
+ </msg>
+<msg timestamp="20220520 15:33:27.175" level="INFO">C:\Users\DELL\AppData\Roaming\Python\Python39\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'reqres.in'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/1.26.x/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20220520 15:33:27.178" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20220520 15:33:26.077" endtime="20220520 15:33:27.178"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${res_body}</var>
+<arg>${response.content}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220520 15:33:27.183" level="INFO">${res_body} = {"name":"david","job":"leader","email":"david@gmail.com","id":"133","createdAt":"2022-05-20T11:03:27.032Z"}</msg>
+<status status="PASS" starttime="20220520 15:33:27.179" endtime="20220520 15:33:27.183"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${res_body}</arg>
+<arg>${name}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20220520 15:33:27.184" endtime="20220520 15:33:27.186"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${res_body}</arg>
+<arg>${email}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20220520 15:33:27.188" endtime="20220520 15:33:27.190"/>
+</kw>
+<kw name="Convert String to JSON" library="JSONLibrary">
+<var>${json_object}</var>
+<arg>${response.content}</arg>
+<doc>Convert String to JSON object</doc>
+<msg timestamp="20220520 15:33:27.195" level="INFO">${json_object} = {'name': 'david', 'job': 'leader', 'email': 'david@gmail.com', 'id': '133', 'createdAt': '2022-05-20T11:03:27.032Z'}</msg>
+<status status="PASS" starttime="20220520 15:33:27.191" endtime="20220520 15:33:27.195"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${id}</var>
+<arg>${json_object}</arg>
+<arg>$.id</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220520 15:33:27.285" level="INFO">${id} = ['133']</msg>
+<status status="PASS" starttime="20220520 15:33:27.197" endtime="20220520 15:33:27.286"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${id[0]}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220520 15:33:27.287" endtime="20220520 15:33:27.289"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>99 &lt; ${id[0]} &lt; 1000</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20220520 15:33:27.291" endtime="20220520 15:33:27.292"/>
+</kw>
+<kw name="Convert String to JSON" library="JSONLibrary">
+<var>${json_object}</var>
+<arg>${response.content}</arg>
+<doc>Convert String to JSON object</doc>
+<msg timestamp="20220520 15:33:27.294" level="INFO">${json_object} = {'name': 'david', 'job': 'leader', 'email': 'david@gmail.com', 'id': '133', 'createdAt': '2022-05-20T11:03:27.032Z'}</msg>
+<status status="PASS" starttime="20220520 15:33:27.293" endtime="20220520 15:33:27.294"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>${date}</var>
+<arg>${json_object}</arg>
+<arg>$.createdAt</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20220520 15:33:27.347" level="INFO">${date} = ['2022-05-20T11:03:27.032Z']</msg>
+<status status="PASS" starttime="20220520 15:33:27.295" endtime="20220520 15:33:27.347"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${stringDate}</var>
+<arg>${date[0]}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20220520 15:33:27.350" level="INFO">${stringDate} = 2022-05-20T11:03:27.032Z</msg>
+<status status="PASS" starttime="20220520 15:33:27.348" endtime="20220520 15:33:27.350"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${stringDate}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220520 15:33:27.350" endtime="20220520 15:33:27.351"/>
+</kw>
+<kw name="Convert Date" library="CustumLib">
+<var>${final}</var>
+<arg>${stringDate}</arg>
+<msg timestamp="20220520 15:33:27.352" level="INFO">${final} = 1401-02-30T11:03:27.032Z</msg>
+<status status="PASS" starttime="20220520 15:33:27.351" endtime="20220520 15:33:27.352"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${final}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220520 15:33:27.353" endtime="20220520 15:33:27.353"/>
+</kw>
+<status status="PASS" starttime="20220520 15:33:26.072" endtime="20220520 15:33:27.354"/>
+</test>
+<status status="PASS" starttime="20220520 15:33:25.496" endtime="20220520 15:33:27.356"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Scenario4">Scenario4</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20220520 15:33:26.077" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+</errors>
+</robot>
