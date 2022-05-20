@@ -13,7 +13,8 @@ ${country}    Thailand
 FirstTestCase
     create session    mysession    ${base_url}
 
-    ${body}=    create dictionary    name=${name}    job=${job}    email=${email}    country=${country}
+    ${body}=    create dictionary    name=${name}    job=${job}    email=${email}
+    Set To Dictionary   ${body}    country    ${country}
     ${header}=    create dictionary    Content-type=application/json
     ${response}=    post request    mysession    /api/users    data=${body}    headers=${header}
 
@@ -21,8 +22,3 @@ FirstTestCase
     log to console    ${response.content}
     ${res_body}=    convert to string    ${response.content}
     should contain    ${res_body}    ${country}
-
-
-
-
-
